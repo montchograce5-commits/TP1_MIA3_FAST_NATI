@@ -1,0 +1,55 @@
+@startuml Diagramme_de_classes
+title Gestion des inscriptions universitaires
+
+class Etudiant {
+  - matricule : String
+  - nom : String
+  - prenom : String
+  - email : String
+  + afficherInformations()
+  + modifierInformations()
+}
+
+class Filiere {
+  - idFiliere : int
+  - nomFiliere : String
+  + afficherFiliere()
+}
+
+class Niveau {
+  - idNiveau : int
+  - libelle : String
+  + afficherNiveau()
+}
+
+class AnneeAcademique {
+  - idAnnee : int
+  - libelle : String
+  + afficherAnnee()
+}
+
+class Inscription {
+  - idInscription : int
+  - dateInscription : Date
+  - statut : String
+  + enregistrer()
+  + annuler()
+  + afficherInscription()
+}
+
+class Scolarite {
+  - listeInscriptions : List
+  + ajouterInscription()
+  + verifierInscription()
+  + rechercherEtudiant()
+  + afficherListeEtudiants()
+  + afficherParAnnee()
+}
+
+Etudiant "1" -- "0..*" Inscription
+Filiere "1" -- "0..*" Inscription
+Niveau "1" -- "0..*" Inscription
+AnneeAcademique "1" -- "0..*" Inscription
+Scolarite "1" -- "0..*" Inscription
+
+@enduml
