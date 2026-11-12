@@ -1,0 +1,32 @@
+@startuml Dagramme_de_sequence
+title Gestion des inscriptions universitaires
+actor "Agent de scolarité" as Agent
+participant "Application" as App
+participant "Scolarite" as S
+participant "Base de données" as BD
+
+Agent -> App : Saisir matricule
+App -> S : rechercherEtudiant(matricule)
+S -> BD : chercherEtudiant(matricule)
+BD --> S : Résultat
+S --> App : Étudiant trouvé
+
+Agent -> App : Demander inscription
+App -> S : verifierInscription()
+
+S -> BD : Vérifier inscription existante
+BD --> S : Résultat
+
+alt Étudiant déjà inscrit
+    S --> App : Inscription déjà existante
+    App --> Agent : Afficher erreur
+else Étudiant non inscrit
+    Agent -> App : Choisir filière et niveau
+    App -> S : ajouterInscription()
+    S -> BD : Enregistrer inscription
+    BD --> S : Confirmation
+    S --> App : Inscription réussie
+    App --> Agent : Afficher confirmation
+end
+
+@enduml
