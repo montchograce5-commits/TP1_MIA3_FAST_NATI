@@ -1,0 +1,49 @@
+ Associations entre les classes
+
+C'est ici que les cardinalités UML deviennent importantes.
+
+Nous avons trois associations principales.
+
+Association 1 : Étudiant – Emprunt
+
+- Un étudiant peut effectuer plusieurs emprunts.
+- Un emprunt appartient à un seul étudiant.
+
+Cardinalité :
+
+\\[ Etudiant\ (1) \longleftrightarrow (0..\*)\ Emprunt \\]
+
+Association 2 : Livre – Emprunt
+
+- Un livre peut apparaître dans plusieurs emprunts au cours du temps.
+- Un emprunt concerne un seul livre.
+- Un livre ne peut avoir qu'un seul emprunt actif à la fois.
+
+Cardinalité :
+
+\\[ Livre\ (1) \longleftrightarrow (0..\*)\ Emprunt \\]
+
+Attention : le `0..*` représente l'historique des emprunts, pas plusieurs emprunts simultanés.
+
+Association 3 : Bibliothèque – Livre, Étudiant et Emprunt
+
+La bibliothèque gère plusieurs livres, plusieurs étudiants et plusieurs emprunts.
+
+On peut représenter cette relation par une agrégation ou une composition selon la responsabilité retenue. Dans notre conception, la bibliothèque possède et gère les collections de ces objets.
+
+*Diagramme de cas d'utilisation UML
+1. Identification des acteurs
+Nous allons retenir deux acteurs :
+
+    1. Étudiant : consulte les livres disponibles et peut consulter ses emprunts.
+    2. Bibliothécaire : gère les livres, les étudiants, les emprunts et les retours.
+
+- LES SYMBOLES
+Symbole	Signification
++	Attribut ou méthode public
+-	Attribut ou méthode privé
+1	Exactement un
+0..*	Zéro ou plusieurs
+--	Association
+o--	Agrégation
+
