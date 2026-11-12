@@ -1,0 +1,25 @@
+@startuml Diagram_de_cas_dutilisation
+left to right direction
+
+actor Bibliothecaire
+
+rectangle "Systeme de gestion de bibliotheque" {
+    usecase "Consulter les livres" as UC1
+    usecase "Enregistrer un livre" as UC2
+    usecase "Enregistrer un etudiant" as UC3
+    usecase "Emprunter un livre" as UC4
+    usecase "Retourner un livre" as UC5
+    usecase "Consulter les emprunts" as UC6
+    usecase "Verifier la disponibilite" as UC7
+}
+
+Bibliothecaire --> UC1
+Bibliothecaire --> UC2
+Bibliothecaire --> UC3
+Bibliothecaire --> UC4
+Bibliothecaire --> UC5
+Bibliothecaire --> UC6
+
+UC4 ..> UC7 : <<include>>
+
+@enduml

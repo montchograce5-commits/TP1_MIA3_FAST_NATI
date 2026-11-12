@@ -1,0 +1,77 @@
+@startuml Diagram_de_classe
+
+title Diagramme de classes - Gestion d'une bibliothèque universitaire
+
+left to right direction
+
+class Livre {
+    - idLivre : string
+    - titre : string
+    - auteur : string
+    - anneePublication : int
+    - disponible : bool
+
+    + Livre()
+    + getIdLivre() : string
+    + getTitre() : string
+    + estDisponible() : bool
+    + emprunter() : void
+    + retourner() : void
+    + afficherInformations() : void
+}
+
+class Etudiant {
+    - matricule : string
+    - nom : string
+    - prenom : string
+    - email : string
+
+    + Etudiant()
+    + getMatricule() : string
+    + getNom() : string
+    + getPrenom() : string
+    + getEmail() : string
+    + afficherInformations() : void
+}
+
+class Emprunt {
+    - idEmprunt : string
+    - dateEmprunt : string
+    - dateRetour : string
+    - actif : bool
+
+    + Emprunt()
+    + terminerEmprunt(date : string) : void
+    + estActif() : bool
+    + afficherInformations() : void
+}
+
+class Bibliotheque {
+    - livres : vector<Livre>
+    - etudiants : vector<Etudiant>
+    - emprunts : vector<Emprunt>
+
+    + ajouterLivre(livre : Livre) : void
+    + inscrireEtudiant(etudiant : Etudiant) : void
+    + emprunterLivre(matricule : string, idLivre : string) : bool
+    + retournerLivre(idLivre : string) : bool
+    + rechercherLivre(idLivre : string) : Livre*
+    + afficherLivres() : void
+    + afficherEmprunts() : void
+}
+
+' Associations historiques
+Etudiant "1" -- "0..*" Emprunt : effectue
+Livre "1" -- "0..*" Emprunt : concerne
+
+' Gestion des objets
+Bibliotheque "1" o-- "0..*" Livre : gère
+Bibliotheque "1" o-- "0..*" Etudiant : enregistre
+Bibliotheque "1" o-- "0..*" Emprunt : suit
+
+note right of Livre
+  Un seul emprunt actif
+  autorisé à la fois.
+end note
+
+@enduml
